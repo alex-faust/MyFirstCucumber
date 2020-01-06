@@ -139,7 +139,7 @@ public class Commons
     }
 
 
-    public static XSSFSheet openExcel(int sheetNum)
+    public static XSSFSheet openExcel(String fileName, int sheetNum)
     {
         log.info("Opening excel sheet.");
 
@@ -147,7 +147,7 @@ public class Commons
         try
         {
             FileInputStream file = new FileInputStream(
-                    new File("C:\\Users\\abcle\\IdeaProjects\\MyFirstSelenium\\files\\credentials.xlsx"));
+                    new File("C:\\Users\\abcle\\IdeaProjects\\MyFirstSelenium\\files\\"+ fileName + ".xlsx"));
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             sheet = workbook.getSheetAt(sheetNum);
 
