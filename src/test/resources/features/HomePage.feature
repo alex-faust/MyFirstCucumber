@@ -1,0 +1,21 @@
+Feature: HomePage feature
+
+  @Test
+  Scenario: Verify Home Page Loaded
+    Given I open the Home Page
+    Then Check the Home Page title is correct
+
+  @Test
+  Scenario: Verify Home Page Loaded 2
+    Given I open the Home Page
+    Then Check the Home Page title is correct2
+
+  @Test
+  Scenario: Verify Dropdown menu
+    Given I open the Home Page
+    Then I go to the drop down menu and compare the contents
+
+  @Test
+  Scenario: Open all links on Home Page
+    Given I open the Home Page
+    Then I collect and open each link on the page
