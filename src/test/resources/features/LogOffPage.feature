@@ -7,7 +7,6 @@ Feature: LogOffPage feature
     Then I log off from the welcome page
     Then I verify that I have arrived at the log off page
 
-    @Test
   Scenario: Enter the user details from the configuration file
     Given I open the Home Page
     Then I click on the login link
@@ -15,7 +14,6 @@ Feature: LogOffPage feature
     Then I log off from the welcome page
     Then I verify that I have arrived at the log off page
 
-    @Test
   Scenario: Enter the user details from an excel file
     Given I open the Home Page
     Then I click on the login link

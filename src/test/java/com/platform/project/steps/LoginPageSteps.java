@@ -1,5 +1,6 @@
 package com.platform.project.steps;
 
+import com.platform.project.Cucumber.TestContext;
 import com.platform.project.commons.Commons;
 import com.platform.project.commons.ReadPropertyFile;
 import com.platform.project.commons.WebDriverManager;
@@ -7,6 +8,7 @@ import com.platform.project.pageObjects.HomePage;
 import com.platform.project.pageObjects.LogInPage;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.openqa.selenium.WebDriver;
 
@@ -16,14 +18,25 @@ public class LoginPageSteps
     LogInPage logInPage;
     HomePage homePage;
     WebDriverManager webDriverManager;
+    TestContext testContext;
 
+    public LoginPageSteps(TestContext context)
+    {
+        testContext = context;
+        homePage = testContext.getPageObjectManager().getHomePage();
+        logInPage = testContext.getPageObjectManager().getLogInPage();
+    }
     @Before
     public void setUp()
     {
         webDriverManager = new WebDriverManager();
-        driver = webDriverManager.getDriver
-                (Commons.createEnvVariable("browser", ReadPropertyFile.getConfigPropertyVal("browser")));
-        homePage = new HomePage(driver);
+        //driver = webDriverManager.getDriver
+                //(Commons.createEnvVariable("browser", ReadPropertyFile.getConfigPropertyVal("browser")));
+       /*driver = testContext.getWebDriverManager()
+               .getDriver((Commons.createEnvVariable
+                       ("browser",
+                               ReadPropertyFile.getConfigPropertyVal("browser"))));*/
+        //homePage = new HomePage(driver);
         logInPage = new LogInPage(driver);
     }
 
@@ -33,7 +46,7 @@ public class LoginPageSteps
         driver.quit();
     }
 
-    @Then("^I click on the login link$")
+    @Given("^I click on the login link$")
     public void clickLoginLink()
     {
         homePage.clickLogInText();

@@ -1,5 +1,6 @@
 package com.platform.project.steps;
 
+import com.platform.project.Cucumber.TestContext;
 import com.platform.project.commons.Commons;
 import com.platform.project.commons.ReadPropertyFile;
 import com.platform.project.commons.WebDriverManager;
@@ -19,6 +20,13 @@ public class HomePageSteps
     HomePage homePage;
     LogInPage logInPage;
     WebDriverManager webDriverManager;
+    TestContext testContext;
+
+    public HomePageSteps(TestContext context)
+    {
+        testContext = context;
+        homePage = testContext.getPageObjectManager().getHomePage();
+    }
 
     @Before
     public void setUp()

@@ -32,7 +32,7 @@ public class LogInPage
     public LogInPage(WebDriver driver)
     {
         this.driver = driver;
-        driver.get(ReadPropertyFile.getConfigPropertyVal("loginPageUrl"));
+        //driver.get(ReadPropertyFile.getConfigPropertyVal("loginPageUrl"));
         PageFactory.initElements(driver, this);
     }
 

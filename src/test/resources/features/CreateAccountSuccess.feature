@@ -1,6 +1,6 @@
 Feature: Create Account Success feature
 
-  @Test
+
   Scenario: Creating an account
     Given I open the Home Page
     Then I click on the create account button

@@ -9,7 +9,6 @@ import com.platform.project.pageObjects.LogInPage;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Then;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 public class CheckOutPageSteps
