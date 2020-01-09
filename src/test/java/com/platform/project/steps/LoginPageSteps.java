@@ -1,6 +1,5 @@
 package com.platform.project.steps;
 
-import com.platform.project.Cucumber.TestContext;
 import com.platform.project.commons.Commons;
 import com.platform.project.commons.ReadPropertyFile;
 import com.platform.project.commons.WebDriverManager;
@@ -18,25 +17,14 @@ public class LoginPageSteps
     LogInPage logInPage;
     HomePage homePage;
     WebDriverManager webDriverManager;
-    TestContext testContext;
 
-    public LoginPageSteps(TestContext context)
-    {
-        testContext = context;
-        homePage = testContext.getPageObjectManager().getHomePage();
-        logInPage = testContext.getPageObjectManager().getLogInPage();
-    }
     @Before
     public void setUp()
     {
         webDriverManager = new WebDriverManager();
-        //driver = webDriverManager.getDriver
-                //(Commons.createEnvVariable("browser", ReadPropertyFile.getConfigPropertyVal("browser")));
-       /*driver = testContext.getWebDriverManager()
-               .getDriver((Commons.createEnvVariable
-                       ("browser",
-                               ReadPropertyFile.getConfigPropertyVal("browser"))));*/
-        //homePage = new HomePage(driver);
+        driver = webDriverManager.getDriver
+                (Commons.createEnvVariable("browser", ReadPropertyFile.getConfigPropertyVal("browser")));
+        homePage = new HomePage(driver);
         logInPage = new LogInPage(driver);
     }
 

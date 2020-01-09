@@ -1,5 +1,10 @@
 Feature: LogOffPage feature
 
+  //Background: Open Home Page and click log in link
+    //Given I open the Home Page
+    //Then I click on the login link
+
+  @Test
   Scenario: Enter the user details, log in, then log off correctly
     Given I open the Home Page
     Then I click on the login link
@@ -8,15 +13,15 @@ Feature: LogOffPage feature
     Then I verify that I have arrived at the log off page
 
   Scenario: Enter the user details from the configuration file
-    Given I open the Home Page
-    Then I click on the login link
+    //Given I open the Home Page
+    //Then I click on the login link
     Then I enter the users details from configuration file
     Then I log off from the welcome page
     Then I verify that I have arrived at the log off page
 
   Scenario: Enter the user details from an excel file
-    Given I open the Home Page
-    Then I click on the login link
+    //Given I open the Home Page
+    //Then I click on the login link
     Then I enter the users details from excel file
     Then I log off from the welcome page
     Then I verify that I have arrived at the log off page

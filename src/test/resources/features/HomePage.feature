@@ -1,5 +1,6 @@
 Feature: HomePage feature
 
+  @Test
   Scenario: Verify Home Page Loaded
     Given I open the Home Page
     Then Check the Home Page title is correct
