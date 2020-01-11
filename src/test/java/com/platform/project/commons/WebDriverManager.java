@@ -70,7 +70,7 @@ public class WebDriverManager
         }
         //Implicit wait
         //how long it will take for all pages to open
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         return driver;
     }
@@ -102,5 +102,9 @@ public class WebDriverManager
     {
         return getDriver(Commons.createEnvVariable("browser",
                 ReadPropertyFile.getConfigPropertyVal("browser")));
+    }
+
+    public void quitDriver(){
+        driver.quit();
     }
 }

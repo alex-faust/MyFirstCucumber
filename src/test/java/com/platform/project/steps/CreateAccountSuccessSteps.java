@@ -1,12 +1,10 @@
 package com.platform.project.steps;
 
 import com.platform.project.commons.Commons;
-import com.platform.project.commons.ReadPropertyFile;
-import com.platform.project.commons.WebDriverManager;
+import com.platform.project.commons.TestContext;
 import com.platform.project.pageObjects.CreateAccountSuccess;
 import com.platform.project.pageObjects.HomePage;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
+import com.platform.project.pageObjects.LogInPage;
 import cucumber.api.java.en.Then;
 import org.openqa.selenium.WebDriver;
 
@@ -14,17 +12,17 @@ public class CreateAccountSuccessSteps
 {
     WebDriver driver;
     HomePage homePage;
-    WebDriverManager webDriverManager;
     CreateAccountSuccess cas;
+    TestContext testContext;
+    LogInPage logInPage;
 
-    @Before
-    public void setUp()
+    public CreateAccountSuccessSteps(TestContext context)
     {
-        webDriverManager = new WebDriverManager();
-        driver = webDriverManager.getDriver
-                (Commons.createEnvVariable("browser", ReadPropertyFile.getConfigPropertyVal("browser")));
-        homePage = new HomePage(driver);
-        cas = new CreateAccountSuccess(driver);
+        testContext = context;
+        driver = testContext.getWebDriverManager().getDriver();
+        homePage = testContext.getPageObjectManager().getHomePage();
+        logInPage = testContext.getPageObjectManager().getLogInPage();
+        cas = testContext.getPageObjectManager().getCreateAccountSuccess();
     }
 
     @Then("^I click on the create account button$")
@@ -44,11 +42,5 @@ public class CreateAccountSuccessSteps
     {
         Commons.check(driver, cas.getPageTitle().equals
                 ("Your Account Has Been Created!"), "createAnAccountFail");
-    }
-
-    @After
-    public void cleanUp()
-    {
-        driver.quit();
     }
 }

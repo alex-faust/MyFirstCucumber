@@ -1,14 +1,11 @@
 package com.platform.project.steps;
 
 import com.platform.project.commons.Commons;
-import com.platform.project.commons.ReadPropertyFile;
-import com.platform.project.commons.WebDriverManager;
+import com.platform.project.commons.TestContext;
 import com.platform.project.pageObjects.HomePage;
 import com.platform.project.pageObjects.LogInPage;
 import com.platform.project.pageObjects.LogOffPage;
 import com.platform.project.pageObjects.WelcomePage;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.openqa.selenium.WebDriver;
@@ -19,27 +16,27 @@ public class LogOffPageSteps
     LogInPage logInPage, logInPage1;
     HomePage homePage, homePage1;
     WelcomePage welcomePage, welcomePage1;
-    WebDriverManager webDriverManager, webDriverManager1;
     LogOffPage logOff, logOff1;
+    TestContext testContext;
 
-    @Before
-    public void setUp()
+    public LogOffPageSteps(TestContext context)
     {
-        webDriverManager = new WebDriverManager();
-        driver = webDriverManager.getDriver
-                (Commons.createEnvVariable("browser", ReadPropertyFile.getConfigPropertyVal("browser")));
-        homePage = new HomePage(driver);
-        logInPage = new LogInPage(driver);
-        welcomePage = new WelcomePage(driver);
-        logOff = new LogOffPage(driver);
+        testContext = context;
+        driver = testContext.getWebDriverManager().getDriver();
+        driver1 = testContext.getWebDriverManager().getDriver();
 
-        webDriverManager1 = new WebDriverManager();
-        driver1 = webDriverManager.getDriver
-                (Commons.createEnvVariable("browser", ReadPropertyFile.getConfigPropertyVal("browser")));
-        homePage1 = new HomePage(driver1);
-        logInPage1 = new LogInPage(driver1);
-        welcomePage1 = new WelcomePage(driver1);
-        logOff1 = new LogOffPage(driver1);
+        homePage = testContext.getPageObjectManager().getHomePage();
+        homePage1 = testContext.getPageObjectManager().getHomePage();
+
+        logInPage = testContext.getPageObjectManager().getLogInPage();
+        logInPage1 = testContext.getPageObjectManager().getLogInPage();
+
+        logOff = testContext.getPageObjectManager().getLogOffPage();
+        logOff1 = testContext.getPageObjectManager().getLogOffPage();
+
+        welcomePage = testContext.getPageObjectManager().getWelcomePage();
+        welcomePage1 = testContext.getPageObjectManager().getWelcomePage();
+
     }
 
     @Then("^I enter the users details$")
@@ -106,14 +103,7 @@ public class LogOffPageSteps
     public void verifyBOthUsersLogOff()
     {
         Commons.check(driver, logOff.getPageTitle().equals("Log Off"), "firstOfTwoUsersFail");
-        Commons.check(driver, logOff.getPageTitle().equals("Log Off"), "secondOfTwoUsersFail");
-    }
-
-    @After
-    public void cleanUp()
-    {
-        driver.quit();
-        driver1.quit();
+        Commons.check(driver1, logOff1.getPageTitle().equals("Log Off"), "secondOfTwoUsersFail");
     }
 }
 
