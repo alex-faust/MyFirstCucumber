@@ -29,11 +29,11 @@ public class LoginPageSteps
         homePage.clickLogInText();
     }
 
-    @Then("^Check the Login Page title is correct$")
-    public void verifyLoginPageText()
+    @Then("^Check that the Login Page title is (.*)$")
+    public void verifyLoginPageText(String expectedTitle)
     {
         Commons.check(driver, logInPage.getPageTitle().equals
-                ("Welcome, Please Sign In"), "openLoginPageFail");
+                (expectedTitle), "Login page title is incorrect");
     }
 
 }

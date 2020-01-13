@@ -28,16 +28,10 @@ public class HomePageSteps
         homePage.openHomePage();
     }
 
-    @Then("^Check the Home Page title is correct$")
-    public void verifyHomePageTitle()
+    @Then("^Check that the Home Page title is (.*)$")
+    public void verifyHomePageTitle(String expectedTitle)
     {
-        Commons.check(driver, homePage.getPageTitle().equals("Welcome to iBusiness"), "Home Page Title didn't match.");
-    }
-
-    @Then("^Check the Home Page title is correct2$")
-    public void verifyHomePageTitle2()
-    {
-        Commons.check(driver, homePage.getPageTitle().equals("Welcome to iBusiness2"), "Home Page Title didn't match.");
+        Commons.check(driver, homePage.getPageTitle().equals(expectedTitle), "Home Page Title didn't match.");
     }
 
     @Then("^I go to the drop down menu and compare the contents$")
@@ -51,8 +45,9 @@ public class HomePageSteps
     @Then("^I collect and open each link on the page$")
     public void openAllLinks()
     {
-        //need to verify them within here
-        homePage.checkAllLinks();
+        Commons.check(driver, homePage.checkAllLinks() == 0,
+                "There are some broken links.");
     }
+
 }
 

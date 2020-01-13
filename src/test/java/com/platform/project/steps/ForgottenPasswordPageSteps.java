@@ -25,17 +25,17 @@ public class ForgottenPasswordPageSteps
         forgottenPasswordPage = testContext.getPageObjectManager().getForgottenPasswordPage();
     }
 
-    @Then("^I click the password forgotten button$")
+    @Then("^I click the password forgotten link$")
     public void clickForgottenPassworkBtn()
     {
         logInPage.passwordForgotten();
     }
 
-    @Then("^Verify the No Records Found message$")
-    public void verifyNoRecordsMessage()
+    @Then("^Click continue and verify that the No Records Found message is(.*)$")
+    public void verifyNoRecordsMessage(String expectedResult)
     {
-        Commons.check(driver, forgottenPasswordPage.getNoRecordsFound().equals(" Error: The E-Mail Address was not " +
-                "found in our records, please try again."), "forgotPasswordFail");
+        Commons.check(driver, forgottenPasswordPage.getNoRecordsFound().equals(expectedResult),
+                "password forgotten error message has failed");
     }
     }
 

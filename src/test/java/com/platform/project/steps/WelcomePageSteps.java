@@ -28,11 +28,11 @@ public class WelcomePageSteps
         logInPage.enterUserDetailsError();
     }
 
-    @Then("^Verify that the error message matches$")
-    public void noPasswordMatch()
+    @Then("^Verify that the error message matches(.*)$")
+    public void noPasswordMatch(String expectedTitle)
     {
         Commons.check(driver, logInPage.getErrorMsg().equals
-                (" Error: No match for E-Mail Address and/or Password."),
+                (expectedTitle),
                 "noEmailPasswordMatchFail");
     }
 }

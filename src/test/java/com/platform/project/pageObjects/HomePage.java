@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -75,13 +76,12 @@ public class HomePage
         createAccount.click();
     }
 
-    public void checkAllLinks()
+    public int checkAllLinks()
     {
         HttpURLConnection huc;
-        String homePage = ReadPropertyFile.getConfigPropertyVal("homePageUrl");
-        int respCode;
         String url;
         List<WebElement> allLinks = driver.findElements(By.tagName("a"));
+        ArrayList<String> failedLinks = new ArrayList<>();
         Iterator<WebElement> it = allLinks.iterator();
 
         log.info("All the web links are: ");
@@ -96,7 +96,7 @@ public class HomePage
                 continue;
             }
 
-            if (!url.startsWith(homePage))
+            if (!url.startsWith(ReadPropertyFile.getConfigPropertyVal("homePageUrl")))
             {
                 System.out.println("URL belongs to another domain, skipping it.");
                 continue;
@@ -107,11 +107,12 @@ public class HomePage
                 huc = (HttpURLConnection) (new URL(url).openConnection());
                 huc.setRequestMethod("HEAD");
                 huc.connect();
-                respCode = huc.getResponseCode();
+                //respCode = huc.getResponseCode();
 
-                if (respCode >= 400)
+                if (huc.getResponseCode() >= 400)
                 {
                     System.out.println(url + " is a broken link.");
+                    failedLinks.add(url);
                 } else
                 {
                     System.out.println(url + " is a valid link.");
@@ -119,11 +120,17 @@ public class HomePage
             } catch (MalformedURLException mue)
             {
                 mue.printStackTrace();
-            } catch (IOException ioe)
-            {
+            } catch (IOException ioe){
                 ioe.printStackTrace();
             }
         }
+
+        //logging all failed links
+        for(String s: failedLinks)
+        {
+            log.info(s);
+        }
+        return failedLinks.size();
     }
 
     public String[] dropDownMenu()

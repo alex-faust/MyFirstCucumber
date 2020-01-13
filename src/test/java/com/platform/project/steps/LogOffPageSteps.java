@@ -17,25 +17,28 @@ public class LogOffPageSteps
     HomePage homePage, homePage1;
     WelcomePage welcomePage, welcomePage1;
     LogOffPage logOff, logOff1;
-    TestContext testContext;
+    TestContext testContext, testContext1;
 
-    public LogOffPageSteps(TestContext context)
+    public LogOffPageSteps(TestContext context, TestContext context1)
     {
         testContext = context;
+        //testContext1 = new TestContext();
+        testContext1 = context1;
+
         driver = testContext.getWebDriverManager().getDriver();
-        driver1 = testContext.getWebDriverManager().getDriver();
+        driver1 = testContext1.getWebDriverManager().getDriver("firefox");
 
         homePage = testContext.getPageObjectManager().getHomePage();
-        homePage1 = testContext.getPageObjectManager().getHomePage();
+        homePage1 = testContext1.getPageObjectManager().getHomePage();
 
         logInPage = testContext.getPageObjectManager().getLogInPage();
-        logInPage1 = testContext.getPageObjectManager().getLogInPage();
+        logInPage1 = testContext1.getPageObjectManager().getLogInPage();
 
         logOff = testContext.getPageObjectManager().getLogOffPage();
-        logOff1 = testContext.getPageObjectManager().getLogOffPage();
+        logOff1 = testContext1.getPageObjectManager().getLogOffPage();
 
         welcomePage = testContext.getPageObjectManager().getWelcomePage();
-        welcomePage1 = testContext.getPageObjectManager().getWelcomePage();
+        welcomePage1 = testContext1.getPageObjectManager().getWelcomePage();
 
     }
 
@@ -51,11 +54,11 @@ public class LogOffPageSteps
         welcomePage.logOff();
     }
 
-    @Then("^I verify that I have arrived at the log off page$")
-    public void verifyLogOffPage()
+    @Then("^I verify that the log off page title is (.*)$")
+    public void verifyLogOffPage(String expectedTitle)
     {
         Commons.check(driver, logOff.getPageTitle().equals
-                ("Log Off"), "Failed to reach LogOffPage");
+                (expectedTitle), "Failed to reach LogOffPage");
 
     }
 
@@ -99,11 +102,11 @@ public class LogOffPageSteps
         welcomePage1.logOff();
     }
 
-    @Then("^I verify both users have logged off$")
-    public void verifyBOthUsersLogOff()
+    @Then("^I verify both users have logged off and that the LogOff page title is (.*)$")
+    public void verifyBOthUsersLogOff(String expectedTitle)
     {
-        Commons.check(driver, logOff.getPageTitle().equals("Log Off"), "firstOfTwoUsersFail");
-        Commons.check(driver1, logOff1.getPageTitle().equals("Log Off"), "secondOfTwoUsersFail");
+        Commons.check(driver, logOff.getPageTitle().equals(expectedTitle), "firstOfTwoUsersFail");
+        Commons.check(driver1, logOff1.getPageTitle().equals(expectedTitle), "secondOfTwoUsersFail");
     }
 }
 

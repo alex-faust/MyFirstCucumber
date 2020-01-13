@@ -158,4 +158,15 @@ public class Commons
         }
         return sheet;
     }
+
+    public static void clickOnElement(WebDriver driver, WebElement el, int seconds)
+    {
+        if (isElementVisible(driver, el, seconds))
+        {
+            log.info("Clicking on element.");
+            el.click();
+        } else {
+            log.info("Element could not be found.");
+        }
+    }
 }

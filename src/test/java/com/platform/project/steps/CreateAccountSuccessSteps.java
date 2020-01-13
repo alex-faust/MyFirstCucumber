@@ -14,14 +14,14 @@ public class CreateAccountSuccessSteps
     HomePage homePage;
     CreateAccountSuccess cas;
     TestContext testContext;
-    LogInPage logInPage;
+    //LogInPage logInPage;
 
     public CreateAccountSuccessSteps(TestContext context)
     {
         testContext = context;
         driver = testContext.getWebDriverManager().getDriver();
         homePage = testContext.getPageObjectManager().getHomePage();
-        logInPage = testContext.getPageObjectManager().getLogInPage();
+        //logInPage = testContext.getPageObjectManager().getLogInPage();
         cas = testContext.getPageObjectManager().getCreateAccountSuccess();
     }
 
@@ -37,10 +37,10 @@ public class CreateAccountSuccessSteps
         cas.createAnAccount();
     }
 
-    @Then("^Verify that I have created an account$")
-    public void verifyAccountCreated()
+    @Then("^Verify that the create account text is (.*)$")
+    public void verifyAccountCreated(String expectedTitle)
     {
         Commons.check(driver, cas.getPageTitle().equals
-                ("Your Account Has Been Created!"), "createAnAccountFail");
+                (expectedTitle), "failed to create an account.");
     }
 }

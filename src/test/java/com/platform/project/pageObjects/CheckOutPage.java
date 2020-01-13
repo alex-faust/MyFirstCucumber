@@ -93,6 +93,7 @@ public class CheckOutPage
         //if the items in the list are the same as the items in the array...
         if ((Arrays.toString(items).equals(Arrays.toString(items1))) && (count == values))
         {
+            log.info("The cart totals add up.");
             checkOutBtn.click();
             continueButton.click();
             cashOnDeliveryBtn.click();

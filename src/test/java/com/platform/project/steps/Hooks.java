@@ -6,21 +6,28 @@ import cucumber.api.java.Before;
 
 public class Hooks
 {
-    TestContext testContext;
+    TestContext testContext, testContext1;
 
-    public Hooks(TestContext context) {
+    public Hooks(TestContext context)
+    {
         testContext = context;
     }
-
-   @Before
-    public void BeforeSteps()
+    /*public Hooks(TestContext context, TestContext context1)
     {
+        testContext = context;
+        testContext1 = context1;
+    }*/
 
-    }
+    @Before
+    public void BeforeSteps() {}
 
     @After
     public void AfterSteps()
     {
         testContext.getWebDriverManager().quitDriver();
+        /*if (testContext1 != null)
+        {
+            testContext1.getWebDriverManager().quitDriver();
+        }*/
     }
 }

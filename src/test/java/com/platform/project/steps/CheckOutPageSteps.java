@@ -12,7 +12,7 @@ public class CheckOutPageSteps
 {
     WebDriver driver;
     HomePage homePage;
-    LogInPage logInPage;
+    //LogInPage logInPage;
     CheckOutPage checkOutPage;
     TestContext testContext;
 
@@ -21,7 +21,7 @@ public class CheckOutPageSteps
         testContext = context;
         driver = testContext.getWebDriverManager().getDriver();
         homePage = testContext.getPageObjectManager().getHomePage();
-        logInPage = testContext.getPageObjectManager().getLogInPage();
+        //logInPage = testContext.getPageObjectManager().getLogInPage();
     }
 
     @Then("^I select items by clicking them and continuing by returning to the Home Page$")
@@ -36,11 +36,11 @@ public class CheckOutPageSteps
         homePage.goToCartContents();
     }
 
-    @Then("^Verify that items and prices in cart are correct and checkout order$")
-    public void verifyAndCheckOut()
+    @Then("^Verify that items and prices in cart are correct and checkout order page title is(.*)$")
+    public void verifyAndCheckOut(String expectedTitle)
     {
         Commons.check(driver, checkOutPage.verifyCart().equals
-                ("Your Order Has Been Processed!"), "buyProducts1Fail");
+                (expectedTitle), "buyProducts1Fail");
     }
 
     @Then("^I select items by clicking them returning to the Home Page by clicking back twice$")
