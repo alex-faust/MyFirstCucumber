@@ -1,7 +1,6 @@
 @tagCAS
 Feature: Create Account Success feature
 
-  @tagError
   Scenario: Creating an account
     Given I open the Home Page
     Then I click on the create account button

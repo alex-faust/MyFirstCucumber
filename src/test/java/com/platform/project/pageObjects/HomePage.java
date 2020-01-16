@@ -6,8 +6,6 @@ import com.platform.project.commons.ReadPropertyFile;
 import org.apache.log4j.Logger;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,9 +13,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -73,7 +68,7 @@ public class HomePage
 
     public void clickCreateAccount()
     {
-        createAccount.click();
+        Commons.clickOnElement(driver, createAccount);
     }
 
     public int checkAllLinks()
@@ -188,14 +183,16 @@ public class HomePage
         {
             WebElement webElement = driver.findElement(By.linkText(items[i]));
             webElement.click();
-            addToCartButton.click();
+            Commons.clickOnElement(driver, addToCartButton);
             count = i + 1;
-            log.info("Cartbutton text is: " + cartContents.getText());
+            log.info("Cartbutton text is: " + Commons.getElementText(driver, cartContents));
 
             //checking if item was added into cart
-            if (cartContents.getText().equals("Cart Contents (" + count + ")"))
+            if (Commons.getElementText(driver, cartContents).equals("Cart Contents (" + count + ")"))
             {
-                goToHomePage.click();
+                Commons.clickOnElement(driver, goToHomePage);
+                //log.info(Commons.getElementText(driver, cartContents));
+                //log.info("Cart Contents (" + count + ")");
             }
         }
     }
@@ -250,6 +247,6 @@ public class HomePage
 
     public void goToCartContents()
     {
-        cartContents.click();
+        Commons.clickOnElement(driver, cartContents, 10);
     }
 }

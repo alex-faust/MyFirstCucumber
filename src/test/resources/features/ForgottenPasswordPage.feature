@@ -1,7 +1,6 @@
 @tagForgot
 Feature: ForgottenPasswordPage feature
 
-  @tagError
   Scenario: User has forgotten password
     Given I open the Home Page
     Then I click on the login link

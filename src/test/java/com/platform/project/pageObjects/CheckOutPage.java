@@ -69,14 +69,16 @@ public class CheckOutPage
         //searching page for items and adding them to an array to compare items from excel sheet
         for (int l = 0; l < items.length; l++)
         {
-            WebElement we = driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[3]/form[1]/div[1]/div[1]/table[1]/tbody[1]/tr[" + (l + 1) + "]/td[1]/table[1]/tbody[1]/tr[1]/td[2]/a[1]/strong[1]"));
+            WebElement we = driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[3]/form[1]/div[1]/div[1]" +
+                    "/table[1]/tbody[1]/tr[" + (l + 1) + "]/td[1]/table[1]/tbody[1]/tr[1]/td[2]/a[1]/strong[1]"));
             items1[l] = we.getText();
         }
 
         //retrieve the totals from the web elements and removing the dollar sign
         for (int m = 0; m < priceTotals.length; m++)
         {
-            WebElement we = driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[3]/form[1]/div[1]/div[1]/table[1]/tbody[1]/tr[" + (m + 1) + "]/td[2]/strong[1]"));
+            WebElement we = driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[3]/form[1]/div[1]/div[1]" +
+                    "/table[1]/tbody[1]/tr[" + (m + 1) + "]/td[2]/strong[1]"));
             values += Double.parseDouble(we.getText().substring(1));
         }
 
@@ -94,12 +96,12 @@ public class CheckOutPage
         if ((Arrays.toString(items).equals(Arrays.toString(items1))) && (count == values))
         {
             log.info("The cart totals add up.");
-            checkOutBtn.click();
-            continueButton.click();
-            cashOnDeliveryBtn.click();
-            continueButton.click();
-            confirmOrder.click();
-            return orderConfirmation.getText();
+            Commons.clickOnElement(driver, checkOutBtn);
+            Commons.clickOnElement(driver, continueButton);
+            Commons.clickOnElement(driver, cashOnDeliveryBtn);
+            Commons.clickOnElement(driver, continueButton);
+            Commons.clickOnElement(driver, confirmOrder);
+            return Commons.getElementText(driver, orderConfirmation);
         } else
         {
             log.info("The totals to not match up.");

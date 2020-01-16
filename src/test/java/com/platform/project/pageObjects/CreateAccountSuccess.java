@@ -82,6 +82,6 @@ public class CreateAccountSuccess
         yourPasswordConfirm.sendKeys(ReadPropertyFile.getConfigPropertyVal("yourPasswordConfirm"));
         country.click();
         genderMale.click();
-        continueButton.click();
+        Commons.clickOnElement(driver, continueButton);
     }
 }

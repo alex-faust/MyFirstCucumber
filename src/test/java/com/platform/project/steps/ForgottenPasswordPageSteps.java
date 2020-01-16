@@ -34,8 +34,7 @@ public class ForgottenPasswordPageSteps
     @Then("^Click continue and verify that the No Records Found message is(.*)$")
     public void verifyNoRecordsMessage(String expectedResult)
     {
-        Commons.check(driver, forgottenPasswordPage.getNoRecordsFound().equals(expectedResult),
-                "password forgotten error message has failed");
+        Commons.check(driver, forgottenPasswordPage.getNoRecordsFound().equals(expectedResult), "password forgotten error message has failed");
     }
-    }
+}
 

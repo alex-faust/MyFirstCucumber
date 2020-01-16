@@ -25,9 +25,9 @@ public class Hooks
     public void AfterSteps()
     {
         testContext.getWebDriverManager().quitDriver();
-        /*if (testContext1 != null)
+        if (testContext1 != null)
         {
             testContext1.getWebDriverManager().quitDriver();
-        }*/
+        }
     }
 }

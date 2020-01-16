@@ -104,7 +104,7 @@ public class LogInPage
 
     public void passwordForgotten()
     {
-        passwordForgottenLink.click();
+        Commons.clickOnElement(driver, passwordForgottenLink);
     }
 
 }

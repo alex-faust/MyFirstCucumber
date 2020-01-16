@@ -169,4 +169,9 @@ public class Commons
             log.info("Element could not be found.");
         }
     }
+
+    public static void clickOnElement(WebDriver driver, WebElement el)
+    {
+        clickOnElement(driver, el, 3);
+    }
 }

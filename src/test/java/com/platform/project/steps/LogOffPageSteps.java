@@ -19,11 +19,11 @@ public class LogOffPageSteps
     LogOffPage logOff, logOff1;
     TestContext testContext, testContext1;
 
-    public LogOffPageSteps(TestContext context, TestContext context1)
+    public LogOffPageSteps(TestContext context)
     {
         testContext = context;
-        //testContext1 = new TestContext();
-        testContext1 = context1;
+        //testContext1 = context1;
+        testContext1 = new TestContext("firefox");
 
         driver = testContext.getWebDriverManager().getDriver();
         driver1 = testContext1.getWebDriverManager().getDriver("firefox");

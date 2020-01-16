@@ -1,5 +1,6 @@
 package com.platform.project.pageObjects;
 
+import com.platform.project.commons.Commons;
 import com.platform.project.commons.ReadPropertyFile;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -26,7 +27,7 @@ public class ForgottenPasswordPage
 
     public String getNoRecordsFound()
     {
-        continueButton.click();
+        Commons.clickOnElement(driver, continueButton);
         log.info("Error message found.");
         return errorMessage.getText();
     }

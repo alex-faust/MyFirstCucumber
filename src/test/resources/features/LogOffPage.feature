@@ -5,6 +5,7 @@ Feature: LogOffPage feature
     #Given I open the Home Page
     #Then I click on the login link
 
+  @tagLogOff1
   Scenario: Enter the user details, log in, then log off correctly
     Given I open the Home Page
     Then I click on the login link
@@ -12,6 +13,7 @@ Feature: LogOffPage feature
     Then I log off from the welcome page
     Then I verify that the log off page title is Log Off
 
+  @tagLogOff2
   Scenario: Enter the user details from the configuration file
     Given I open the Home Page
     Then I click on the login link
@@ -19,6 +21,7 @@ Feature: LogOffPage feature
     Then I log off from the welcome page
     Then I verify that the log off page title is Log Off
 
+  @tagLogOff3
   Scenario: Enter the user details from an excel file
     Given I open the Home Page
     Then I click on the login link
@@ -26,7 +29,7 @@ Feature: LogOffPage feature
     Then I log off from the welcome page
     Then I verify that the log off page title is Log Off
 
-  @tagError
+  @tagLogOff4
   Scenario: Have two users log on at the same time
     Given I have both users open the home page
     Then I have both users click on the login link
