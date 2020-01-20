@@ -63,7 +63,7 @@ public class HomePage
     public void clickLogInText()
     {
         log.info("Clicking log in text");
-        logYourselfIn.click();
+        Commons.clickOnElement(driver, logYourselfIn);
     }
 
     public void clickCreateAccount()
@@ -148,7 +148,7 @@ public class HomePage
         return values;
     }
 
-    public void selectItems1()
+    public String selectItems1()
     {
         /**
          * 2. Open the homepage
@@ -164,7 +164,7 @@ public class HomePage
 
         for (int i = 0; i < items.length; i++)
         {
-            XSSFRow row = Commons.openExcel("Purchase Items", 0).getRow(i);
+            XSSFRow row = Commons.openExcel("Purchase Items",0).getRow(i);
             XSSFCell cellValue = row.getCell(0);
             items[i] = String.valueOf(cellValue);
         }
@@ -174,7 +174,6 @@ public class HomePage
             XSSFCell cellValue = row.getCell(1);
             theirPrices[j] = Double.parseDouble(String.valueOf(cellValue));
         }
-
 
         log.info("items in the array are: " + Arrays.toString(items));
         log.info("items in the array are: " + Arrays.toString(theirPrices));
@@ -191,13 +190,12 @@ public class HomePage
             if (Commons.getElementText(driver, cartContents).equals("Cart Contents (" + count + ")"))
             {
                 Commons.clickOnElement(driver, goToHomePage);
-                //log.info(Commons.getElementText(driver, cartContents));
-                //log.info("Cart Contents (" + count + ")");
             }
         }
+        return Commons.getElementText(driver, cartContents);
     }
 
-    public void selectItems2()
+    public String selectItems2()
     {
         /**
          * 2. Open the homepage
@@ -210,7 +208,6 @@ public class HomePage
         String[] items = new String[5];
         double[] theirPrices = new double[5];
         int count;
-
 
         for (int i = 0; i < items.length; i++)
         {
@@ -232,21 +229,22 @@ public class HomePage
         {
             WebElement webElement = driver.findElement(By.linkText(items[i]));
             webElement.click();
-            addToCartButton.click();
+            Commons.clickOnElement(driver, addToCartButton);
             count = i + 1;
-            log.info("Cartbutton text is: " + cartContents.getText());
+            log.info("Cartbutton text is: " + Commons.getElementText(driver, cartContents));
 
             //checking if item was added into cart
-            if (cartContents.getText().equals("Cart Contents (" + count + ")"))
+            if (Commons.getElementText(driver, cartContents).equals("Cart Contents (" + count + ")"))
             {
                 driver.navigate().back();
                 driver.navigate().back();
             }
         }
+        return Commons.getElementText(driver, cartContents);
     }
 
     public void goToCartContents()
     {
-        Commons.clickOnElement(driver, cartContents, 10);
+        Commons.clickOnElement(driver, cartContents, 3);
     }
 }

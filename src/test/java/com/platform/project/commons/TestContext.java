@@ -5,13 +5,13 @@ public class TestContext
     private WebDriverManager webDriverManager;
     private PageObjectManager pageObjectManager;
 
-    /*public TestContext()
+    public TestContext()
     {
         webDriverManager = new WebDriverManager();
         pageObjectManager = new PageObjectManager(webDriverManager.getDriver());
-    }*/
+    }
 
-    public TestContext(String browser)
+    /*public TestContext(String browser)
     {
         if(browser == null)
         {
@@ -22,7 +22,7 @@ public class TestContext
             webDriverManager = new WebDriverManager();
             pageObjectManager = new PageObjectManager(webDriverManager.getDriver(browser));
         }
-    }
+    }*/
 
     public WebDriverManager getWebDriverManager()
     {

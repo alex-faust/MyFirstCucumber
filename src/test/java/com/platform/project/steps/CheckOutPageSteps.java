@@ -5,6 +5,7 @@ import com.platform.project.commons.TestContext;
 import com.platform.project.pageObjects.CheckOutPage;
 import com.platform.project.pageObjects.HomePage;
 import com.platform.project.pageObjects.LogInPage;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.openqa.selenium.WebDriver;
 
@@ -12,7 +13,6 @@ public class CheckOutPageSteps
 {
     WebDriver driver;
     HomePage homePage;
-    //LogInPage logInPage;
     CheckOutPage checkOutPage;
     TestContext testContext;
 
@@ -21,13 +21,13 @@ public class CheckOutPageSteps
         testContext = context;
         driver = testContext.getWebDriverManager().getDriver();
         homePage = testContext.getPageObjectManager().getHomePage();
-        //logInPage = testContext.getPageObjectManager().getLogInPage();
+        checkOutPage = testContext.getPageObjectManager().getCheckOutPage();
     }
 
-    @Then("^I select items by clicking them and continuing by returning to the Home Page$")
-    public void selectItems1()
+    @And("^I select items1 and verify that the cart content text is (.*)$")
+    public void selectItems1(String expectedTitle)
     {
-        homePage.selectItems1();
+        Commons.check(driver, homePage.selectItems1().equals(expectedTitle), "Cart contents mismatch");
     }
 
     @Then("^I go to the cart contents$")
@@ -36,17 +36,16 @@ public class CheckOutPageSteps
         homePage.goToCartContents();
     }
 
-    @Then("^Verify that items and prices in cart are correct and checkout order page title is(.*)$")
+    @Then("^Verify that items and prices in cart are correct and checkout order page title is (.*)$")
     public void verifyAndCheckOut(String expectedTitle)
     {
-        Commons.check(driver, checkOutPage.verifyCart().equals
-                (expectedTitle), "buyProducts1Fail");
+        Commons.check(driver, checkOutPage.verifyCart().equals(expectedTitle), "buyProducts1Fail");
     }
 
-    @Then("^I select items by clicking them returning to the Home Page by clicking back twice$")
-    public void selectItems2()
+    @And("^I select items2 and verify that the cart content text is (.*)$")
+    public void selectItems2(String expectedTitle)
     {
-        homePage.selectItems2();
+        Commons.check(driver, homePage.selectItems2().equals(expectedTitle), "Cart contents mismatch");
     }
 
 }

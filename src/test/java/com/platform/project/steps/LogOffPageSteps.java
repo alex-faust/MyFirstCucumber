@@ -23,22 +23,22 @@ public class LogOffPageSteps
     {
         testContext = context;
         //testContext1 = context1;
-        testContext1 = new TestContext("firefox");
+       // testContext1 = new TestContext("firefox");
 
         driver = testContext.getWebDriverManager().getDriver();
-        driver1 = testContext1.getWebDriverManager().getDriver("firefox");
+        //driver1 = testContext1.getWebDriverManager().getDriver("firefox");
 
         homePage = testContext.getPageObjectManager().getHomePage();
-        homePage1 = testContext1.getPageObjectManager().getHomePage();
+        //homePage1 = testContext1.getPageObjectManager().getHomePage();
 
         logInPage = testContext.getPageObjectManager().getLogInPage();
-        logInPage1 = testContext1.getPageObjectManager().getLogInPage();
+        //logInPage1 = testContext1.getPageObjectManager().getLogInPage();
 
         logOff = testContext.getPageObjectManager().getLogOffPage();
-        logOff1 = testContext1.getPageObjectManager().getLogOffPage();
+        //logOff1 = testContext1.getPageObjectManager().getLogOffPage();
 
         welcomePage = testContext.getPageObjectManager().getWelcomePage();
-        welcomePage1 = testContext1.getPageObjectManager().getWelcomePage();
+        //welcomePage1 = testContext1.getPageObjectManager().getWelcomePage();
 
     }
 

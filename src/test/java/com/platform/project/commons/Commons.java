@@ -40,7 +40,7 @@ public class Commons
         } catch (IOException e)
         {
             e.printStackTrace();
-            log.info("Unable to take screenshot" + fileName);
+            log.info("Unable to take screenshot " + fileName);
         }
     }
 
@@ -53,7 +53,8 @@ public class Commons
         } else
         {
             log.info(failMessage);
-            takeSnapShot(driver, currentThread().getStackTrace()[2].getClassName(), currentThread().getStackTrace()[2].getMethodName());
+            takeSnapShot(driver, currentThread().getStackTrace()[2].getClassName(),
+                    currentThread().getStackTrace()[2].getMethodName());
             Assert.fail();
             //Assert.assertTrue(false);
         }
@@ -83,6 +84,29 @@ public class Commons
             log.info("element is not visible."); //can't do getText() because no element was found
             return false;
         }
+    }
+
+    public static boolean waitForElement(WebDriver driver, WebElement element)
+    {
+        return waitForElement(driver, element, 3);
+    }
+
+    public static boolean clickOnElement(WebDriver driver, WebElement el, int seconds)
+    {
+        if (isElementVisible(driver, el, seconds))
+        {
+            log.info("Clicking on element.");
+            el.click();
+            return true;
+        } else {
+            log.info("Element could not be found.");
+            return false;
+        }
+    }
+
+    public static boolean clickOnElement(WebDriver driver, WebElement el)
+    {
+        return clickOnElement(driver, el, 3);
     }
 
     //Explicit Wait = Fluent wait
@@ -138,7 +162,6 @@ public class Commons
         }
     }
 
-
     public static XSSFSheet openExcel(String fileName, int sheetNum)
     {
         log.info("Opening excel sheet.");
@@ -157,21 +180,5 @@ public class Commons
             ioe.printStackTrace();
         }
         return sheet;
-    }
-
-    public static void clickOnElement(WebDriver driver, WebElement el, int seconds)
-    {
-        if (isElementVisible(driver, el, seconds))
-        {
-            log.info("Clicking on element.");
-            el.click();
-        } else {
-            log.info("Element could not be found.");
-        }
-    }
-
-    public static void clickOnElement(WebDriver driver, WebElement el)
-    {
-        clickOnElement(driver, el, 3);
     }
 }
